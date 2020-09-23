@@ -15,7 +15,7 @@ def get_bars(code="600000.XSHG", count=10, unit='1d', end_date=None, fq_ref_date
     result = request_jqdata(method='get_bars', code=code, count=count, unit=unit, end_date=end_date,
                             fq_ref_date=fq_ref_date)
     if return_type == 'df':
-        df = pd.read_csv(io.BytesIO(result), sep='\s+', encoding='GB2312', dtype=str)
+        df = pd.read_csv(io.BytesIO(result), dtype=str)
 
         return df
 
@@ -49,7 +49,7 @@ def get_token(mob=None, pwd=None, force=False):
         return jqdata_env["token"]
 
 
-def request_jqdata(method: string, token: string = jqdata_env["token"], return_content=True, **kwargs):
+def request_jqdata(method: string, token: string = None, return_content=True, **kwargs):
     if not token:
         token = get_token(force=True)
     result = _request_jqdata(method=method, token=token, return_content=return_content, **kwargs)
