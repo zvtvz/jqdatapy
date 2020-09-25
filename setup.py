@@ -32,7 +32,7 @@ except:
 
 setup(
     name='jqdatapy',
-    version='0.0.5',
+    version='0.0.6',
     description='unified,modular quantitative system for human beings ',
     long_description=long_description,
     url='https://github.com/zvtvz/jqdatapy',
@@ -53,6 +53,9 @@ setup(
 
     keywords='quant stock finance fintech big-data zvt technical-analysis trading-platform pandas fundamental-analysis',
     packages=find_packages(exclude=['examples', 'contrib', 'docs', 'tests', 've', 'research']),  # Required
+    package_data={
+        'jqdatapy': ['*.json'],
+    },
 
     install_requires=requirements,
     project_urls={  # Optional
