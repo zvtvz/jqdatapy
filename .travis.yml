@@ -1,11 +1,12 @@
 language: python
 cache: pip
 python:
-- '3.6'
+  - '3.6'
 install:
-- git fetch --tags --depth=500
-- pip install 'pytest>=3.6' --force-reinstall
-- pip install -r ./requirements.txt
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - pytest
 deploy:
   provider: pypi
   user: __token__
@@ -16,4 +17,4 @@ deploy:
 notifications:
   email:
     recipients:
-    - 5533061@qq.com
+      - 5533061@qq.com
