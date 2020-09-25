@@ -6,7 +6,10 @@ import string
 import pandas as pd
 import requests
 
-from jqdatapy import jqdata_env, save_env
+from jqdata import jqdata_env, save_env
+
+__all__ = ['run_query', 'get_all_securities', 'get_trade_days', 'get_fundamentals', 'get_mtss', 'get_all_trade_days',
+           'get_bars', 'get_token', 'request_jqdata']
 
 url = "https://dataapi.joinquant.com/apis"
 
@@ -29,7 +32,7 @@ def get_all_securities(code='stock', date=None):
     :param code: 证券类型,可选: stock, fund, index, futures, etf, lof, fja, fjb, QDII_fund, open_fund, bond_fund, stock_fund, money_market_fund, mixture_fund, options
     :param date: 日期，用于获取某日期还在上市的证券信息，date为空时表示获取所有日期的标的信息
     """
-    return request_jqdata(method='get_all_securities', code=code, date=date)
+    return request_jqdata(method='get_all_securities', code=code, date=date, parse_dates=None)
 
 
 def get_trade_days(date='1990-01-01', end_date=None):
@@ -38,7 +41,7 @@ def get_trade_days(date='1990-01-01', end_date=None):
     :param date: 开始日期
     :param end_date: 结束日期
     """
-    return request_jqdata(method='get_trade_days', date=date, end_date=end_date)
+    return request_jqdata(method='get_trade_days', date=date, end_date=end_date, parse_dates=False, header=None)
 
 
 def get_fundamentals(table='balance', columns=None, code='000001.XSHE', date=None, count=1000):
@@ -67,12 +70,12 @@ def get_mtss(code='000001.XSHE', date='2005-01-01', end_date=None):
 
 
 def get_all_trade_days():
-    return request_jqdata(method='get_all_trade_days')
+    return request_jqdata(method='get_all_trade_days', parse_dates=False, header=None)
 
 
 def get_bars(code="600000.XSHG", count=10, unit='1d', end_date=None, fq_ref_date=None, return_type='df'):
     return request_jqdata(method='get_bars', code=code, count=count, unit=unit, end_date=end_date,
-                          fq_ref_date=fq_ref_date, return_type=return_type)
+                          fq_ref_date=fq_ref_date, return_type=return_type, parse_dates=['date'])
 
 
 def get_token(mob=None, pwd=None, force=False):
@@ -103,7 +106,7 @@ def get_token(mob=None, pwd=None, force=False):
 
 
 def request_jqdata(method: string, token: string = None, return_type='df', dtype={'code': str}, parse_dates=['day'],
-                   **kwargs):
+                   header='infer', **kwargs):
     if not token:
         token = get_token(force=True)
     resp = _request_jqdata(method=method, token=token, **kwargs)
@@ -113,7 +116,7 @@ def request_jqdata(method: string, token: string = None, return_type='df', dtype
     if return_type == 'df':
         if not resp.content:
             return None
-        df = pd.read_csv(io.BytesIO(resp.content), dtype=dtype, parse_dates=parse_dates)
+        df = pd.read_csv(io.BytesIO(resp.content), dtype=dtype, header=header, parse_dates=parse_dates)
         return df
 
     return resp.content
@@ -150,10 +153,10 @@ def _request_jqdata(method: string, token: string = jqdata_env["token"], **kwarg
 
 
 if __name__ == "__main__":
-    # print(get_bars(code='000338.XSHE'))
-    # print(get_all_securities())
-    # print(get_trade_days())
-    # print(get_trade_days())
-    # print(get_fundamentals(count=10))
-    # print(get_mtss())
-    print(run_query(table='finance.STK_STOCK_VALUATION', count=10, parse_dates=None))
+    print(get_bars(code='000338.XSHE'))
+    print(get_all_securities())
+    print(get_trade_days())
+    print(get_trade_days())
+    print(get_fundamentals(count=10))
+    print(get_mtss())
+    print(run_query(count=10, parse_dates=None))

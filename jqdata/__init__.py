@@ -10,10 +10,12 @@ if not JQDATA_HOME:
 jqdata_env = {}
 
 
-def init_env(jqdata_home: str = JQDATA_HOME) -> None:
+def init_env(username: str = None, password: str = None, jqdata_home: str = JQDATA_HOME) -> str:
     """
 
-    :param jqdata_home: home path for jqdata
+    :param username: 聚宽用户名，即注册手机号
+    :param password: 密码
+    :param jqdata_home: 配置存储路径，默认为~/jqdata-home
     """
     if not os.path.exists(jqdata_home):
         os.makedirs(jqdata_home)
@@ -29,6 +31,12 @@ def init_env(jqdata_home: str = JQDATA_HOME) -> None:
         for k in config_json:
             jqdata_env[k] = config_json[k]
 
+    if username and password:
+        jqdata_env['username'] = username
+        jqdata_env['password'] = password
+        with open(config_path, 'w+') as outfile:
+            json.dump(jqdata_env, outfile)
+
     import pprint
     pprint.pprint(jqdata_env)
 
@@ -41,3 +49,9 @@ config_path = init_env()
 def save_env():
     with open(config_path, 'w+') as outfile:
         json.dump(jqdata_env, outfile)
+
+
+from .api import *
+
+__all__ = ['run_query', 'get_all_securities', 'get_trade_days', 'get_fundamentals', 'get_mtss', 'get_all_trade_days',
+           'get_bars', 'get_token', 'request_jqdata', 'init_env']
