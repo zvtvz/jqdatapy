@@ -1,20 +1,19 @@
 language: python
 cache: pip
 python:
-  - '3.6'
+- '3.6'
 install:
-  - pip install -r requirements.txt
-# command to run tests
+- pip install -r requirements.txt
 script:
-  - pytest
+- pytest
 deploy:
   provider: pypi
   user: __token__
   password:
-    secure: APrzztbN07xlSMygEDBLjoPzCHLPABc9maC/9tx0cSReZZaQCZnjWhJWnc4tq95y5lqp+GxwkJelzBE/uUN7MVWcch6zjQ5lP2UWl+rY1MUCCNuB5jk82SWOy8SV89W4EglOPT6wDoGdPHw1FZk/uhk1KJm/HnxOW4i8X9s94p7pypuN+kWV/EiwT6WlcI+duedewTWeD3qal9vOn8TaNX7ggyBXApk7SzNgcluTYgBBxntXPUJ1B4rz2QWu77Z/8cEglLw0ljzXs1QCQnzHqDf66HB6zfX9R3ke3DuQ3rX/lA9MB9tjbutwSutzY/qoiogsvSiz2Gh2ASoll6R7GnhHR9HuABXvZWMzEKpnAOY07Daufya6oxqnmOgQgfys0KEjeqtwMqTQrkZgiYzh5xTyo6UH20ixvJVUOZtpyNGEOVhLuphC3dTlEJO25ZJzGJ7EVOTg9IEMi1G7/eoa0RUg1O/FrvCR8sK/Wlk2eJsbAPHXE7bERXAo9C+oRiTElA4FP25TdIOoWrrO95rgqToXQk4xoSsmWhTYyKhVDQRciKoGO/ryuB/e3CtncYuAB57GU8wOIjqrIQ6PzfGGuh5kuPq76MoSiMMzUha2EZQZxAFpYvAZwI6+uHstlv9Y2YbwEtfgQV3ZFTrnR9M4WEPkzQVjvHmZr/6mkbJf2TI=
+    secure: spCNovoL/tF+vrdTuFXOsoKRJSGVcTGNr5lQfES5aBEz1yRb73xpF6wMZgmi6/wBtQ+1y+gCytWNZe5Rbjtu3hiYBTxbAZlrls52OjhfaWc/iOWVBaHbt75koF2SKDkP6Xud2YpO43y6m0Vi4l9KeC4Db5+yB17NiXIMphDiDc8tObT0q1xXOWeBeSDFnuISmIzZPLYzyKGNSnwDA6ROLmXn683efjks36IXZ49npLTvru8Kv3hiJ39R1jnijGz4t536i7xLMIs1gdWVy+LtmwRev+NRPO5XESnEcCzTewURkfd9gYPO+SIXHlyfuweRdOyxaUMiGk28wRLg7rDGGJAw5ouIC4vWYY+yqQ8h5HBbkUzKa0seh/t9AW8uQlabvs9LnroXJV5b1ZlqUtFhIj/i2cdMrEBVXxiIWxsXxWmcygxTJbwbQUuKFn0JJy4I3I6ui4spPhyL8Vf5Y4c7+pY2oMqJwvhHGfpMC2yLjl9EkHr3Kten43KPIyijcYin5K25skXfUS2kbqBwFOtupdodXhQtbSarVTwAqmy43VXxswUU5UWmZQSbAheTsCR0E9isbM1Oqp8npdPNBZdMj3avjWN9faSrmkRb2+Una3c7AbPpLE83FJdIvLkjoPvxxFSaVd8lkvadpF9YV16MQj+3EERW2FVFRkyoJg8kaNA=
   on:
     tags: true
 notifications:
   email:
     recipients:
-      - 5533061@qq.com
+    - 5533061@qq.com
