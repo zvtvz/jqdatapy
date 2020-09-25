@@ -31,11 +31,11 @@ except:
     requirements = [str(ir.requirement) for ir in install_reqs]
 
 setup(
-    name='zvt',
-    version='0.8.7',
+    name='jqdatapy',
+    version='0.0.1',
     description='unified,modular quantitative system for human beings ',
     long_description=long_description,
-    url='https://github.com/zvtvz/zvt',
+    url='https://github.com/zvtvz/jqdatapy',
     author='foolcage',
     author_email='5533061@qq.com',
     classifiers=[  # Optional
@@ -55,23 +55,13 @@ setup(
     packages=find_packages(exclude=['examples', 'contrib', 'docs', 'tests', 've', 'research']),  # Required
 
     install_requires=requirements,
-    package_data={
-        'zvt.samples': ['*.zip', '*.json'],
-        'zvt.assets': ['*.css']
-    },
     project_urls={  # Optional
-        'Bug Reports': 'https://github.com/zvtvz/zvt/issues',
+        'Bug Reports': 'https://github.com/zvtvz/jqdatapy/issues',
         'Funding': 'https://www.foolcage.com/zvt',
         'Say Thanks!': 'https://saythanks.io/to/foolcage',
-        'Source': 'https://github.com/zvtvz/zvt',
+        'Source': 'https://github.com/zvtvz/jqdatapy',
     },
 
     include_package_data=True,
     long_description_content_type="text/markdown",
-
-    entry_points={
-        'console_scripts': [
-            'zvt = zvt.main:main',
-        ],
-    },
 )
