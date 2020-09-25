@@ -31,7 +31,7 @@ pip install --upgrade jqdatapy
 
 #### 初始化环境，会自动本地化token
 ```
-In [1]: from jqdata import *
+In [1]: from jqdatapy import *
 In [2]: init_env(username='聚宽注册手机',password='密码')
 ```
 

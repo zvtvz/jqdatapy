@@ -3,7 +3,7 @@ from .context import init_test_context
 
 init_test_context()
 
-from jqdata.api import get_token
+from jqdatapy.api import get_token
 
 
 def test_pass():

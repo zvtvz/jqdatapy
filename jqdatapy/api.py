@@ -6,7 +6,7 @@ import string
 import pandas as pd
 import requests
 
-from jqdata import jqdata_env, save_env
+from jqdatapy import jqdata_env, save_env
 
 __all__ = ['run_query', 'get_all_securities', 'get_trade_days', 'get_fundamentals', 'get_mtss', 'get_all_trade_days',
            'get_bars', 'get_token', 'request_jqdata']
