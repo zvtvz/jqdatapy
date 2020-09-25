@@ -1,0 +1,19 @@
+language: python
+cache: pip
+python:
+- '3.6'
+install:
+- git fetch --tags --depth=500
+- pip install 'pytest>=3.6' --force-reinstall
+- pip install -r ./requirements.txt
+deploy:
+  provider: pypi
+  user: __token__
+  password:
+    secure: APrzztbN07xlSMygEDBLjoPzCHLPABc9maC/9tx0cSReZZaQCZnjWhJWnc4tq95y5lqp+GxwkJelzBE/uUN7MVWcch6zjQ5lP2UWl+rY1MUCCNuB5jk82SWOy8SV89W4EglOPT6wDoGdPHw1FZk/uhk1KJm/HnxOW4i8X9s94p7pypuN+kWV/EiwT6WlcI+duedewTWeD3qal9vOn8TaNX7ggyBXApk7SzNgcluTYgBBxntXPUJ1B4rz2QWu77Z/8cEglLw0ljzXs1QCQnzHqDf66HB6zfX9R3ke3DuQ3rX/lA9MB9tjbutwSutzY/qoiogsvSiz2Gh2ASoll6R7GnhHR9HuABXvZWMzEKpnAOY07Daufya6oxqnmOgQgfys0KEjeqtwMqTQrkZgiYzh5xTyo6UH20ixvJVUOZtpyNGEOVhLuphC3dTlEJO25ZJzGJ7EVOTg9IEMi1G7/eoa0RUg1O/FrvCR8sK/Wlk2eJsbAPHXE7bERXAo9C+oRiTElA4FP25TdIOoWrrO95rgqToXQk4xoSsmWhTYyKhVDQRciKoGO/ryuB/e3CtncYuAB57GU8wOIjqrIQ6PzfGGuh5kuPq76MoSiMMzUha2EZQZxAFpYvAZwI6+uHstlv9Y2YbwEtfgQV3ZFTrnR9M4WEPkzQVjvHmZr/6mkbJf2TI=
+  on:
+    tags: true
+notifications:
+  email:
+    recipients:
+    - 5533061@qq.com
