@@ -54,4 +54,5 @@ def save_env():
 from .api import *
 
 __all__ = ['run_query', 'get_all_securities', 'get_trade_days', 'get_fundamentals', 'get_mtss', 'get_all_trade_days',
-           'get_bars', 'get_token', 'request_jqdata', 'init_env']
+           'get_bars', 'get_token', 'request_jqdata', 'init_env', 'get_dominant_future', 'get_future_contracts',
+           'get_security_info']

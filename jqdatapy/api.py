@@ -9,7 +9,8 @@ import requests
 from jqdatapy import jqdata_env, save_env
 
 __all__ = ['run_query', 'get_all_securities', 'get_trade_days', 'get_fundamentals', 'get_mtss', 'get_all_trade_days',
-           'get_bars', 'get_token', 'request_jqdata']
+           'get_bars', 'get_token', 'request_jqdata', 'get_dominant_future', 'get_future_contracts',
+           'get_security_info']
 
 url = "https://dataapi.joinquant.com/apis"
 
@@ -24,6 +25,32 @@ def run_query(table='finance.STK_EXCHANGE_TRADE_INFO', columns=None, conditions=
               dtype={'code': str, 'symbol': str}, parse_dates=['day', 'pub_date']):
     return request_jqdata(method='run_query', table=table, columns=columns, conditions=conditions, count=count,
                           dtype=dtype, parse_dates=parse_dates)
+
+
+def get_future_contracts(code='AG', date=None):
+    """
+
+    :param code:  期货合约品种，如 'AG'(白银)
+    :param date: 指定日期，默认为None，不指定时返回当前日期下可交易的合约标的列表
+    """
+    return request_jqdata(method='get_future_contracts', code=code, date=date, parse_dates=None)
+
+
+def get_security_info(code='AG2012.XSGE'):
+    """
+
+    :param code:  期货合约品种，如 'AG'(白银)
+    """
+    return request_jqdata(method='get_security_info', code=code, parse_dates=['start_date', 'end_date'])
+
+
+def get_dominant_future(code='AG', date=None):
+    """
+
+    :param code:  期货合约品种，如 'AG'(白银)
+    :param date: 指定日期参数，获取历史上该日期的主力期货合约
+    """
+    return request_jqdata(method='get_dominant_future', code=code, date=date, parse_dates=None)
 
 
 def get_all_securities(code='stock', date=None):
@@ -73,9 +100,10 @@ def get_all_trade_days():
     return request_jqdata(method='get_all_trade_days', parse_dates=False, header=None)
 
 
-def get_bars(code="600000.XSHG", count=10, unit='1d', end_date=None, fq_ref_date=None, return_type='df'):
+def get_bars(code="600000.XSHG", count=10, unit='1d', end_date=None, fq_ref_date=None, return_type='df',
+             parse_dates=['date']):
     return request_jqdata(method='get_bars', code=code, count=count, unit=unit, end_date=end_date,
-                          fq_ref_date=fq_ref_date, return_type=return_type, parse_dates=['date'])
+                          fq_ref_date=fq_ref_date, return_type=return_type, parse_dates=parse_dates)
 
 
 def get_token(mob=None, pwd=None, force=False):
@@ -152,11 +180,21 @@ def _request_jqdata(method: string, token: string = jqdata_env["token"], **kwarg
     return response
 
 
+# custom api
+
 if __name__ == "__main__":
-    print(get_bars(code='000338.XSHE'))
-    print(get_all_securities())
-    print(get_trade_days())
-    print(get_trade_days())
-    print(get_fundamentals(count=10))
-    print(get_mtss())
-    print(run_query(count=10, parse_dates=None))
+    pd.set_option('expand_frame_repr', False)
+    pd.set_option('mode.chained_assignment', 'raise')
+
+    # print(get_bars(code='000338.XSHE'))
+    # print(get_all_securities())
+    # print(get_trade_days())
+    # print(get_trade_days())
+    # print(get_fundamentals(count=10))
+    # print(get_mtss())
+    # print(run_query(count=10, parse_dates=None))
+    # print(get_all_securities(code='futures'))
+    # print(get_future_contracts())
+    # print(get_dominant_future())
+    # print(get_bars(code='AU9999.XSGE'))
+    print(get_security_info())
