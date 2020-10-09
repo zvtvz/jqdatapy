@@ -71,7 +71,8 @@ def get_trade_days(date='1990-01-01', end_date=None):
     return request_jqdata(method='get_trade_days', date=date, end_date=end_date, parse_dates=False, header=None)
 
 
-def get_fundamentals(table='balance', columns=None, code='000001.XSHE', date=None, count=1000):
+def get_fundamentals(table='balance', columns=None, code='000001.XSHE', date=None, count=1000,
+                     parse_dates=['day', 'pubDate']):
     """
 
     :param table: 要查询表名，可选项balance，income，cash_flow，indicator，valuation，bank_indicator，security_indicator，insurance_indicator
@@ -82,7 +83,8 @@ def get_fundamentals(table='balance', columns=None, code='000001.XSHE', date=Non
     :return:
     """
 
-    return request_jqdata(method='get_fundamentals', table=table, columns=columns, code=code, date=date, count=count)
+    return request_jqdata(method='get_fundamentals', table=table, columns=columns, code=code, date=date, count=count,
+                          parse_dates=parse_dates)
 
 
 def get_mtss(code='000001.XSHE', date='2005-01-01', end_date=None):
@@ -190,7 +192,7 @@ if __name__ == "__main__":
     # print(get_all_securities())
     # print(get_trade_days())
     # print(get_trade_days())
-    # print(get_fundamentals(count=10))
+    print(get_fundamentals(count=10, columns='day,pubDate', parse_dates=None))
     # print(get_mtss())
     # print(run_query(count=10, parse_dates=None))
     # print(get_all_securities(code='futures'))
