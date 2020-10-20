@@ -10,7 +10,7 @@ from jqdatapy import jqdata_env, save_env
 
 __all__ = ['run_query', 'get_all_securities', 'get_trade_days', 'get_fundamentals', 'get_mtss', 'get_all_trade_days',
            'get_bars', 'get_token', 'request_jqdata', 'get_dominant_future', 'get_future_contracts',
-           'get_security_info']
+           'get_security_info', 'get_price_period', 'get_bars_period']
 
 url = "https://dataapi.joinquant.com/apis"
 
