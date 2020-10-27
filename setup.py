@@ -32,7 +32,7 @@ except:
 
 setup(
     name='jqdatapy',
-    version='0.1.0.',
+    version='0.1.1.',
     description='unified,modular quantitative system for human beings ',
     long_description=long_description,
     url='https://github.com/zvtvz/jqdatapy',
