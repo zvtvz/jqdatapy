@@ -23,6 +23,16 @@ def run_query(table='finance.STK_EXCHANGE_TRADE_INFO', columns=None, conditions=
                           dtype=dtype, parse_dates=parse_dates)
 
 
+def get_money_flow(code, date, end_date=None):
+    """
+    :param code: 股票代码
+    :param date: 开始日期
+    :param end_date: 结束日期
+    :return:
+    """
+    return request_jqdata(method='get_money_flow', code=code, date=date, end_date=end_date, parse_dates=['date'])
+
+
 def get_future_contracts(code='AG', date=None):
     """
 
@@ -225,6 +235,6 @@ if __name__ == "__main__":
     print(get_price_period(end_date='2010-01-01'))
 
 # the __all__ is generated
-__all__ = ['HttpAccessError', 'run_query', 'get_future_contracts', 'get_security_info', 'get_dominant_future',
-           'get_all_securities', 'get_trade_days', 'get_fundamentals', 'get_mtss', 'get_all_trade_days', 'get_bars',
-           'get_price_period', 'get_bars_period', 'get_token', 'request_jqdata']
+__all__ = ['HttpAccessError', 'run_query', 'get_money_flow', 'get_future_contracts', 'get_security_info',
+           'get_dominant_future', 'get_all_securities', 'get_trade_days', 'get_fundamentals', 'get_mtss',
+           'get_all_trade_days', 'get_bars', 'get_price_period', 'get_bars_period', 'get_token', 'request_jqdata']
