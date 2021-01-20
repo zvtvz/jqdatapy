@@ -16,11 +16,18 @@ class HttpAccessError(Exception):
         self.code = code
         self.msg = msg
 
+    def __str__(self) -> str:
+        return f'code:{self.code},msg:{self.msg}'
+
 
 def run_query(table='finance.STK_EXCHANGE_TRADE_INFO', columns=None, conditions=None, count=1000,
               dtype={'code': str, 'symbol': str}, parse_dates=['day', 'pub_date']):
     return request_jqdata(method='run_query', table=table, columns=columns, conditions=conditions, count=count,
                           dtype=dtype, parse_dates=parse_dates)
+
+
+def get_query_count():
+    return request_jqdata(method='get_query_count',parse_dates=None)
 
 
 def get_money_flow(code, date, end_date=None):
@@ -232,7 +239,8 @@ if __name__ == "__main__":
     # print(get_dominant_future())
     # print(get_bars(code='AU9999.XSGE'))
     # print(get_security_info())
-    print(get_price_period(end_date='2010-01-01'))
+    # print(get_price_period(end_date='2010-01-01'))
+    print(get_query_count())
 
 # the __all__ is generated
 __all__ = ['HttpAccessError', 'run_query', 'get_money_flow', 'get_future_contracts', 'get_security_info',
