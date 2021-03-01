@@ -6,10 +6,11 @@ import string
 import pandas as pd
 import requests
 
-from jqdatapy import jqdata_env, save_env
+from jqdatapy import jqdata_env, save_env, init_env
 
 url = "https://dataapi.joinquant.com/apis"
 
+jqdata_session = requests.Session()
 
 class HttpAccessError(Exception):
     def __init__(self, code, msg):
@@ -212,7 +213,7 @@ def _request_jqdata(method: string, token: string = jqdata_env["token"], **kwarg
         "token": token,
         **kwargs
     }
-    response = requests.post(url, data=json.dumps(body))
+    response = jqdata_session.post(url, data=json.dumps(body))
 
     if response.status_code != 200:
         print(f"request jqdata error,code:{response.status_code},text:{response.text}")
@@ -236,11 +237,11 @@ if __name__ == "__main__":
     # print(run_query(count=10, parse_dates=None))
     # print(get_all_securities(code='futures'))
     # print(get_future_contracts())
-    # print(get_dominant_future())
-    # print(get_bars(code='AU9999.XSGE'))
-    # print(get_security_info())
+    print(get_dominant_future())
+    print(get_bars(code='AU9999.XSGE'))
+    print(get_security_info())
     # print(get_price_period(end_date='2010-01-01'))
-    print(get_query_count())
+    # print(get_query_count())
 
 # the __all__ is generated
 __all__ = ['HttpAccessError', 'run_query', 'get_money_flow', 'get_future_contracts', 'get_security_info',
