@@ -6,11 +6,12 @@ import string
 import pandas as pd
 import requests
 
-from jqdatapy import jqdata_env, save_env, init_env
+from jqdatapy import jqdata_env, save_env
 
 url = "https://dataapi.joinquant.com/apis"
 
 jqdata_session = requests.Session()
+
 
 class HttpAccessError(Exception):
     def __init__(self, code, msg):
@@ -21,6 +22,14 @@ class HttpAccessError(Exception):
         return f'code:{self.code},msg:{self.msg}'
 
 
+class DataError(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+    def __str__(self) -> str:
+        return f'msg:{self.msg}'
+
+
 def run_query(table='finance.STK_EXCHANGE_TRADE_INFO', columns=None, conditions=None, count=1000,
               dtype={'code': str, 'symbol': str}, parse_dates=['day', 'pub_date']):
     return request_jqdata(method='run_query', table=table, columns=columns, conditions=conditions, count=count,
@@ -28,7 +37,7 @@ def run_query(table='finance.STK_EXCHANGE_TRADE_INFO', columns=None, conditions=
 
 
 def get_query_count():
-    return request_jqdata(method='get_query_count',parse_dates=None)
+    return request_jqdata(method='get_query_count', parse_dates=None)
 
 
 def get_money_flow(code, date, end_date=None):
@@ -186,7 +195,10 @@ def request_jqdata(method: string, token: string = None, return_type='df', dtype
     if return_type == 'df':
         if not resp.content:
             return None
-        df = pd.read_csv(io.BytesIO(resp.content), dtype=dtype, header=header, parse_dates=parse_dates)
+        try:
+            df = pd.read_csv(io.BytesIO(resp.content), dtype=dtype, header=header, parse_dates=parse_dates)
+        except:
+            raise DataError(f'wrong data: {resp.content}')
         return df
 
     return resp.content
@@ -244,6 +256,7 @@ if __name__ == "__main__":
     # print(get_query_count())
 
 # the __all__ is generated
-__all__ = ['HttpAccessError', 'run_query', 'get_money_flow', 'get_future_contracts', 'get_security_info',
-           'get_dominant_future', 'get_all_securities', 'get_trade_days', 'get_fundamentals', 'get_mtss',
-           'get_all_trade_days', 'get_bars', 'get_price_period', 'get_bars_period', 'get_token', 'request_jqdata']
+__all__ = ['HttpAccessError', 'DataError', 'run_query', 'get_query_count', 'get_money_flow', 'get_future_contracts',
+           'get_security_info', 'get_dominant_future', 'get_all_securities', 'get_trade_days', 'get_fundamentals',
+           'get_mtss', 'get_all_trade_days', 'get_bars', 'get_price_period', 'get_bars_period', 'get_token',
+           'request_jqdata']

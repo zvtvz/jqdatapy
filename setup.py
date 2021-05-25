@@ -32,7 +32,7 @@ except:
 
 setup(
     name='jqdatapy',
-    version='0.1.5',
+    version='0.1.6',
     description='unified,modular quantitative system for human beings ',
     long_description=long_description,
     url='https://github.com/zvtvz/jqdatapy',
@@ -48,7 +48,8 @@ setup(
         'Topic :: Office/Business :: Financial :: Investment',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7'
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
     ],
 
     keywords='quant stock finance fintech big-data zvt technical-analysis trading-platform pandas fundamental-analysis',
