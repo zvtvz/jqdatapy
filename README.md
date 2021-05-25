@@ -3,7 +3,7 @@
 [![image](https://img.shields.io/pypi/l/jqdatapy.svg)](https://pypi.org/project/jqdatapy/)
 [![image](https://img.shields.io/pypi/pyversions/jqdatapy.svg)](https://pypi.org/project/jqdatapy/)
 [![Build Status](https://api.travis-ci.org/zvtvz/jqdatapy.svg?branch=master)](https://travis-ci.org/zvtvz/jqdatapy)
-[![HitCount](http://hits.dwyl.com/zvtvz/jqdatapy.svg)](http://hits.dwyl.com/zvtvz/jqdatapy)
+[![Downloads](https://pepy.tech/badge/jqdatapy/month)](https://pepy.tech/project/jqdatapy)
 
 ### 说明
 jqdatapy为聚宽数据[http接口](https://dataapi.joinquant.com/docs)的python封装，为官方[jqdatasdk](https://github.com/JoinQuant/jqdatasdk)的轻量替代。
