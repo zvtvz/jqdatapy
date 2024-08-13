@@ -318,7 +318,7 @@ def _get_token(mob=None, pwd=None):
     }
     response = requests.post(url, data=json.dumps(body))
 
-    if response.status_code != 200:
+    if response.status_code != 200 or response.text.startswith("error"):
         print(f"request jqdata error,code:{response.status_code},text:{response.text}")
         raise HttpAccessError(code=response.status_code, msg=response.text)
 
@@ -329,7 +329,7 @@ def _request_jqdata(method: string, token: string = jqdata_env["token"], **kwarg
     body = {"method": method, "token": token, **kwargs}
     response = jqdata_session.post(url, data=json.dumps(body))
 
-    if response.status_code != 200:
+    if response.status_code != 200 or response.text.startswith("error"):
         print(f"request jqdata error,code:{response.status_code},text:{response.text}")
         raise HttpAccessError(code=response.status_code, msg=response.text)
 
